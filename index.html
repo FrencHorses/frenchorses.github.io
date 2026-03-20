@@ -23,7 +23,7 @@ body { background: var(--parchment); color: var(--ink); font-family: var(--serif
 header {
   border-bottom: 1px solid var(--rule);
   padding: 0 clamp(1.5rem, 5vw, 4rem);
-  display: flex; align-items: center; justify-content: space-between; height: 56px;
+  display: flex; align-items: center; justify-content: flex-end; height: 56px;
   position: sticky; top: 0; background: var(--parchment); z-index: 10;
 }
 .masthead-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); }
@@ -55,18 +55,22 @@ nav a:hover { color: var(--accent); }
 .ornament { text-align: center; padding: 0.75rem 0; color: var(--gold); font-size: 0.7rem; letter-spacing: 0.5em; border-bottom: 1px solid var(--rule); }
 
 .section-header {
-  padding: 1.25rem clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
+  padding: 1.25rem clamp(1.5rem, 5vw, 4rem) 1.25rem calc(clamp(1.5rem, 5vw, 4rem) - 3px);
+  border-top: 1px solid rgba(26,23,20,0.28);
+  border-bottom: 1px solid rgba(26,23,20,0.28);
+  border-left: 3px solid var(--accent);
   display: flex; align-items: baseline; gap: 1.5rem;
+  background: #ddd5c4;
 }
-.section-title { font-size: 0.7rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); }
+.section-title { font-size: 0.7rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink); }
 
-.work-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); background: var(--parchment); }
 .work-card {
   padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 5vw, 3.5rem);
   border-right: 1px solid var(--rule); transition: background 0.2s; position: relative;
 }
 .work-card:nth-child(even) { border-right: none; }
-.work-card:hover { background: var(--parchment-dark); }
+.work-card:hover { background: #e8e2d4; }
 .work-card::after {
   content: ''; position: absolute; bottom: 0;
   left: clamp(1.5rem, 5vw, 3.5rem); right: clamp(1.5rem, 5vw, 3.5rem);
@@ -86,7 +90,7 @@ nav a:hover { color: var(--accent); }
 
 .sketch-band {
   border-bottom: 1px solid var(--rule); height: 280px;
-  display: flex; align-items: center; justify-content: center; background: var(--parchment-dark);
+  display: flex; align-items: center; justify-content: center; background: var(--parchment);
   overflow: hidden;
 }
 .sketch-band img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -107,9 +111,11 @@ nav a:hover { color: var(--accent); }
 
 .about-band {
   padding: clamp(2.5rem, 6vh, 4rem) clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
-  display: grid; grid-template-columns: 220px 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start;
+  display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2rem);
+  background: var(--parchment-dark);
 }
-.about-portrait-col { display: flex; flex-direction: column; gap: 1rem; }
+.about-top { display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2rem); }
+.about-portrait-col { display: flex; justify-content: center; }
 .portrait-frame {
   width: 100%; aspect-ratio: 3/4; border: 1px dashed rgba(184,146,42,0.4);
   position: relative; display: flex; align-items: center; justify-content: center;
@@ -124,9 +130,9 @@ nav a:hover { color: var(--accent); }
 .portrait-frame::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
 .portrait-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
 .place-mini {
-  width: 100%; aspect-ratio: 4/3; border: 1px dashed rgba(184,146,42,0.3);
+  width: 100%; height: 220px; border: 1px dashed rgba(184,146,42,0.3);
   position: relative; display: flex; align-items: center; justify-content: center;
-  background: var(--parchment-dark); margin-top: 0.5rem; overflow: hidden;
+  background: var(--parchment-dark); overflow: hidden;
 }
 .place-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .place-mini::before, .place-mini::after {
@@ -145,6 +151,7 @@ nav a:hover { color: var(--accent); }
   border-bottom: 1px solid var(--rule);
   display: flex; align-items: stretch; min-height: 160px;
   padding-left: clamp(1.5rem, 5vw, 4rem);
+  background: var(--parchment);
 }
 .writing-inner { display: flex; align-items: center; flex: 1; overflow: hidden; }
 .writing-cover { width: 160px; height: 160px; flex-shrink: 0; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
@@ -165,6 +172,7 @@ nav a:hover { color: var(--accent); }
 .communities-band {
   padding: 1.75rem clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
   display: flex; align-items: baseline; gap: clamp(1rem, 3vw, 2.5rem); flex-wrap: wrap;
+  background: var(--parchment-dark);
 }
 .communities-label {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -187,7 +195,7 @@ footer {
 .footer-links a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.2s; width: fit-content; }
 .footer-links a:hover { color: var(--accent); }
 
-.contact-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); margin-bottom: 1rem; display: block; }
+.contact-label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-soft); margin-bottom: 1rem; display: block; }
 .contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
 .contact-form input,
 .contact-form textarea {
@@ -235,7 +243,6 @@ footer {
 <body>
 
 <header>
-  <span class="masthead-tag">Francesca Galli &nbsp;·&nbsp; London</span>
   <nav>
     <a href="#work">Work</a>
     <a href="#about">About</a>
@@ -302,24 +309,24 @@ footer {
 </div>
 
 <section class="about-band">
-  <div class="about-portrait-col">
-    <div class="portrait-frame">
-      <!-- To add your portrait: replace the div below with <img src="portrait.jpg" alt="Francesca Galli"> -->
-      <span class="portrait-label">Portrait</span>
+  <div class="about-top">
+    <div class="about-portrait-col">
+      <div class="portrait-frame" style="width:180px;aspect-ratio:3/4">
+        <!-- To add your portrait: replace the span below with <img src="portrait.jpg" alt="Francesca Galli"> -->
+        <span class="portrait-label">Portrait</span>
+      </div>
     </div>
-    <div class="portrait-label" style="text-align:center;margin-top:0.5rem">Francesca Galli</div>
-    <div class="place-mini">
-      <!-- To add a place photo: replace the div content with <img src="place.jpg" alt="Cremona"> -->
-      <span class="place-mini-label">Cremona · London</span>
+    <div class="about-right">
+      <div class="about-text">
+        <p>I came to all of this through a single obsession: <strong>how knowledge moves, breaks, and gets reclaimed</strong> — in institutions, in algorithms, in archives, and in the fabric of cities. The consulting, the fellowship, the writing, the history projects: these are not separate careers. They are the same enquiry, conducted in different registers.</p>
+        <p>Originally from <strong>Cremona</strong>, I have lived in <strong>London</strong> for six years. I volunteer as a gallery guide at the British Museum, with a focus on Roman Britain. I am currently developing a historical walking tour of Cremona tracing Fascism and Resistance from the 1920s to the Second World War.</p>
+        <p>I also sketch cities, play board games with strategic seriousness, and write a Substack called <strong>The Magpie Brain</strong> — on history, ideas, and the texture of how we know things.</p>
+      </div>
     </div>
   </div>
-  <div class="about-right">
-    <div class="about-label">On the work</div>
-    <div class="about-text">
-      <p>I came to all of this through a single obsession: <strong>how knowledge moves, breaks, and gets reclaimed</strong> — in institutions, in algorithms, in archives, and in the fabric of cities. The consulting, the fellowship, the writing, the history projects: these are not separate careers. They are the same enquiry, conducted in different registers.</p>
-      <p>Originally from <strong>Cremona</strong>, I have lived in <strong>London</strong> for six years. I volunteer as a gallery guide at the British Museum, with a focus on Roman Britain. I am currently developing a historical walking tour of Cremona tracing Fascism and Resistance from the 1920s to the Second World War.</p>
-      <p>I also sketch cities, play board games with strategic seriousness, and write a Substack called <strong>The Magpie Brain</strong> — on history, ideas, and the texture of how we know things.</p>
-    </div>
+  <div class="place-mini">
+    <!-- To add a place photo: replace the span below with <img src="place.jpg" alt="Cremona"> -->
+    <span class="place-mini-label">Cremona · London</span>
   </div>
 </section>
 
