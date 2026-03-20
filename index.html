@@ -384,29 +384,44 @@ footer {
 <div class="footer-bottom">© Francesca Galli</div>
 
 <script>
-// ── Substack RSS feed ──
-const RSS_URL = 'https://themagpiebrain.substack.com/feed';
-const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&count=1`;
-fetch(API)
-  .then(r => r.json())
-  .then(data => {
-    if (data.status !== 'ok' || !data.items?.length) return showFallback();
-    const post = data.items[0];
-    const date = new Date(post.pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-    const img = post.thumbnail || post.enclosure?.link || data.feed?.image || '';
-    const subtitle = post.description
-      ? post.description.replace(/<[^>]+>/g, '').trim().slice(0, 120).replace(/\s+\S*$/, '') + '…'
+// ── Substack RSS feed (direct fetch + XML parse) ──
+fetch('https://themagpiebrain.substack.com/feed')
+  .then(r => r.text())
+  .then(str => {
+    const xml = new DOMParser().parseFromString(str, 'text/xml');
+    const item = xml.querySelector('item');
+    if (!item) return showFallback();
+
+    const title = item.querySelector('title')?.textContent || '';
+    const link  = item.querySelector('link')?.textContent
+                  || item.querySelector('link')?.nextSibling?.nodeValue
+                  || '';
+    const pubDate = item.querySelector('pubDate')?.textContent || '';
+    const date = pubDate
+      ? new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
       : '';
+
+    // Substack puts the cover image in <media:content> or <enclosure>
+    const media = item.querySelector('content') || item.querySelector('enclosure');
+    const img = media?.getAttribute('url') || '';
+
+    // Subtitle from description — strip HTML tags
+    const descRaw = item.querySelector('description')?.textContent || '';
+    const descText = descRaw.replace(/<[^>]+>/g, '').trim();
+    const subtitle = descText.length > 10
+      ? descText.slice(0, 120).replace(/\s+\S*$/, '') + '…'
+      : '';
+
     document.getElementById('writing-inner').innerHTML = `
       ${img
-        ? `<a href="${post.link}" target="_blank"><img class="writing-cover" src="${img}" alt=""></a>`
+        ? `<a href="${link}" target="_blank"><img class="writing-cover" src="${img}" alt=""></a>`
         : `<div class="writing-cover-placeholder"><span>cover</span></div>`}
       <div class="writing-text">
-        <a class="writing-essay-title" href="${post.link}" target="_blank">${post.title}</a>
+        <a class="writing-essay-title" href="${link}" target="_blank">${title}</a>
         ${subtitle ? `<span class="writing-subtitle">${subtitle}</span>` : ''}
         <div class="writing-meta">
-          <span class="writing-date">${date}</span>
-          <a class="writing-read" href="${post.link}" target="_blank">Read →</a>
+          ${date ? `<span class="writing-date">${date}</span>` : ''}
+          <a class="writing-read" href="${link}" target="_blank">Read →</a>
         </div>
       </div>`;
   })
