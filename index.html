@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francesca Galli</title>
+<meta name="description" content="Knowledge illuminator. I work where data, history, and civic life intersect.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1714; --ink-soft: #4a4540; --ink-faint: #8a8278;
+  --parchment: #f5f0e8; --parchment-dark: #ede7d9;
+  --accent: #8b3a1a; --accent-light: #c4622e; --gold: #b8922a;
+  --rule: rgba(26,23,20,0.12);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--parchment); color: var(--ink); font-family: var(--serif); line-height: 1.6; min-height: 100vh; }
+
+header {
+  border-bottom: 1px solid var(--rule);
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  display: flex; align-items: center; justify-content: space-between; height: 56px;
+  position: sticky; top: 0; background: var(--parchment); z-index: 10;
+}
+.masthead-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); }
+nav { display: flex; gap: 2rem; }
+nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+nav a:hover { color: var(--accent); }
+
+.hero {
+  padding: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+}
+.hero-name { font-weight: 300; line-height: 1; letter-spacing: -0.02em; }
+.hero-name .first { display: block; font-size: clamp(2.8rem, 6.5vw, 5.2rem); white-space: nowrap; }
+.hero-name .last { display: block; font-size: clamp(2.8rem, 6.5vw, 5.2rem); font-style: italic; color: var(--accent); white-space: nowrap; }
+.hero-tagline {
+  font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 400; line-height: 1.55;
+  color: var(--ink-soft); margin-bottom: 1.5rem;
+  border-left: 2px solid var(--accent); padding-left: 1rem;
+}
+.hero-tagline strong { font-weight: 600; color: var(--ink); }
+.hero-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.hero-pill {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-faint); border: 0.5px solid var(--rule); padding: 4px 10px;
+  border-radius: 2px; background: var(--parchment-dark);
+}
+
+.ornament { text-align: center; padding: 0.75rem 0; color: var(--gold); font-size: 0.7rem; letter-spacing: 0.5em; border-bottom: 1px solid var(--rule); }
+
+.section-header {
+  padding: 1.25rem clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: 1.5rem;
+}
+.section-title { font-size: 0.7rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); }
+
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.work-card {
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 5vw, 3.5rem);
+  border-right: 1px solid var(--rule); transition: background 0.2s; position: relative;
+}
+.work-card:nth-child(even) { border-right: none; }
+.work-card:hover { background: var(--parchment-dark); }
+.work-card::after {
+  content: ''; position: absolute; bottom: 0;
+  left: clamp(1.5rem, 5vw, 3.5rem); right: clamp(1.5rem, 5vw, 3.5rem);
+  height: 1px; background: var(--rule);
+}
+.work-card:nth-last-child(-n+2)::after { display: none; }
+.card-title { font-size: clamp(1.2rem, 2.2vw, 1.55rem); font-weight: 500; line-height: 1.2; margin-bottom: 0.75rem; }
+.card-title em { font-style: italic; color: var(--accent); }
+.card-body { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.65; font-weight: 300; }
+.card-link {
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--accent-light);
+  padding-bottom: 1px; transition: color 0.2s;
+}
+.card-link:hover { color: var(--ink); border-color: var(--ink); }
+
+.sketch-band {
+  border-bottom: 1px solid var(--rule); height: 280px;
+  display: flex; align-items: center; justify-content: center; background: var(--parchment-dark);
+  overflow: hidden;
+}
+.sketch-band img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sketch-placeholder { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.sketch-placeholder-frame {
+  width: 420px; max-width: 90vw; height: 200px;
+  border: 1px dashed rgba(184,146,42,0.4);
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.sketch-placeholder-frame::before, .sketch-placeholder-frame::after {
+  content: ''; position: absolute; width: 16px; height: 16px;
+  border-color: var(--gold); border-style: solid; opacity: 0.5;
+}
+.sketch-placeholder-frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.sketch-placeholder-frame::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.sketch-placeholder-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); }
+.sketch-placeholder-sub { font-size: 0.8rem; font-style: italic; color: var(--ink-faint); font-weight: 300; }
+
+.about-band {
+  padding: clamp(2.5rem, 6vh, 4rem) clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 220px 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start;
+}
+.about-portrait-col { display: flex; flex-direction: column; gap: 1rem; }
+.portrait-frame {
+  width: 100%; aspect-ratio: 3/4; border: 1px dashed rgba(184,146,42,0.4);
+  position: relative; display: flex; align-items: center; justify-content: center;
+  background: var(--parchment-dark); overflow: hidden;
+}
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.portrait-frame::before, .portrait-frame::after {
+  content: ''; position: absolute; width: 16px; height: 16px;
+  border-color: var(--gold); border-style: solid; opacity: 0.5; z-index: 1;
+}
+.portrait-frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.portrait-frame::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.portrait-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
+.place-mini {
+  width: 100%; aspect-ratio: 4/3; border: 1px dashed rgba(184,146,42,0.3);
+  position: relative; display: flex; align-items: center; justify-content: center;
+  background: var(--parchment-dark); margin-top: 0.5rem; overflow: hidden;
+}
+.place-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.place-mini::before, .place-mini::after {
+  content: ''; position: absolute; width: 12px; height: 12px;
+  border-color: var(--gold); border-style: solid; opacity: 0.4; z-index: 1;
+}
+.place-mini::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.place-mini::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.place-mini-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+.about-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); margin-bottom: 1.25rem; }
+.about-text { font-size: clamp(1rem, 1.8vw, 1.2rem); font-weight: 300; line-height: 1.8; color: var(--ink-soft); }
+.about-text strong { font-weight: 500; color: var(--ink); }
+.about-text p + p { margin-top: 1rem; }
+
+.writing-band {
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: stretch; min-height: 90px;
+}
+.writing-source-label {
+  display: flex; align-items: center;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  border-right: 1px solid var(--rule); flex-shrink: 0;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-faint); white-space: nowrap;
+  min-width: clamp(8rem, 14vw, 12rem);
+}
+.writing-inner { display: flex; align-items: center; flex: 1; overflow: hidden; }
+.writing-cover { width: 64px; height: 90px; flex-shrink: 0; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
+.writing-cover-placeholder {
+  width: 64px; height: 90px; flex-shrink: 0; background: var(--parchment-dark);
+  border-right: 1px solid var(--rule); display: flex; align-items: center; justify-content: center;
+}
+.writing-cover-placeholder span { font-family: var(--mono); font-size: 8px; color: var(--ink-faint); letter-spacing: 0.1em; text-transform: uppercase; writing-mode: vertical-rl; opacity: 0.5; }
+.writing-text { padding: 1rem clamp(1rem, 2.5vw, 2rem); display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; flex: 1; min-width: 0; }
+.writing-essay-title { font-size: clamp(0.95rem, 1.8vw, 1.15rem); font-weight: 500; font-style: italic; color: var(--ink); text-decoration: none; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
+.writing-essay-title:hover { color: var(--accent); }
+.writing-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--ink-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+.writing-meta { display: flex; align-items: center; gap: 1rem; margin-top: 0.2rem; }
+.writing-date { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); letter-spacing: 0.1em; }
+.writing-read { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--accent-light); padding-bottom: 1px; transition: color 0.2s; }
+.writing-read:hover { color: var(--ink); border-color: var(--ink); }
+
+.communities-band {
+  padding: 1.75rem clamp(1.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: clamp(1rem, 3vw, 2.5rem); flex-wrap: wrap;
+}
+.communities-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-faint); white-space: nowrap; flex-shrink: 0;
+  padding-right: clamp(0.5rem, 2vw, 1.5rem); border-right: 1px solid var(--rule); margin-right: 0.5rem;
+}
+.community-item { font-style: italic; font-size: 1rem; font-weight: 300; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.community-item:hover { color: var(--accent); }
+.community-sep { color: var(--gold); font-size: 0.7rem; opacity: 0.6; }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: clamp(2rem, 5vh, 3rem) clamp(1.5rem, 5vw, 4rem);
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start;
+}
+.footer-left {}
+.footer-name { font-size: 1rem; font-weight: 300; color: var(--ink); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.footer-tagline { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.2s; width: fit-content; }
+.footer-links a:hover { color: var(--accent); }
+
+.contact-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); margin-bottom: 1rem; display: block; }
+.contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-form input,
+.contact-form textarea {
+  background: transparent; border: none; border-bottom: 0.5px solid var(--rule);
+  padding: 0.5rem 0; font-family: var(--serif); font-size: 0.9rem; font-weight: 300;
+  color: var(--ink); outline: none; width: 100%; resize: none; transition: border-color 0.2s;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: var(--ink-faint); font-style: italic; }
+.contact-form input:focus,
+.contact-form textarea:focus { border-bottom-color: var(--accent); }
+.contact-form textarea { min-height: 60px; }
+.contact-submit {
+  align-self: flex-start; margin-top: 0.25rem;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); background: transparent; border: none;
+  border-bottom: 0.5px solid var(--accent-light); padding-bottom: 1px;
+  cursor: pointer; transition: color 0.2s;
+}
+.contact-submit:hover { color: var(--ink); border-color: var(--ink); }
+.contact-success { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); letter-spacing: 0.12em; font-style: italic; display: none; margin-top: 0.5rem; }
+.contact-error { font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.12em; font-style: italic; display: none; margin-top: 0.5rem; }
+
+.footer-bottom {
+  border-top: 1px solid var(--rule);
+  padding: 1rem clamp(1.5rem, 5vw, 4rem);
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase;
+}
+
+@media (max-width: 680px) {
+  .hero { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card { border-right: none; }
+  .work-card::after { display: block !important; }
+  .work-card:last-child::after { display: none !important; }
+  .about-band { grid-template-columns: 1fr; }
+  .about-portrait-col { flex-direction: row; gap: 1rem; }
+  .portrait-frame { aspect-ratio: 1/1; max-width: 160px; }
+  nav { gap: 1.2rem; }
+  .communities-label { border-right: none; padding-right: 0; width: 100%; margin-bottom: 0.25rem; }
+  .writing-source-label { display: none; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="masthead-tag">Francesca Galli &nbsp;·&nbsp; London</span>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="https://themagpiebrain.substack.com" target="_blank">Writing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1 class="hero-name">
+    <span class="first">Francesca</span>
+    <span class="last">Galli</span>
+  </h1>
+  <div class="hero-right">
+    <p class="hero-tagline">
+      <strong>Knowledge illuminator.</strong> I work where data, history, and civic life intersect.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-pill">Political Technology</span>
+      <span class="hero-pill">AI · Civic Tech</span>
+      <span class="hero-pill">London · Cremona</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-header" id="work">
+  <span class="section-title">Work</span>
+</div>
+
+<div class="work-grid">
+  <div class="work-card">
+    <h2 class="card-title">Political <em>Technology</em></h2>
+    <p class="card-body">Fellow at Newspeak House — London's college of political technology. I run study groups on AI safety, utopia &amp; dystopia, and deliberative democracy. Currently focused on civic applications of AI and the governance questions they surface.</p>
+  </div>
+  <div class="work-card">
+    <h2 class="card-title">Data &amp; <em>Consulting</em></h2>
+    <p class="card-body">Data-focused management consulting — helping organisations understand what their numbers actually mean, and what decisions follow from them. I bring a humanist's suspicion to quantitative work: data without context is just noise.</p>
+  </div>
+  <div class="work-card">
+    <h2 class="card-title">The <em>Magpie</em> Brain</h2>
+    <p class="card-body">A Substack on history, ideas, and how we know what we know. Essays on curation in the age of algorithmic abundance, on what cities remember, on the strangeness of information itself. Irregular, intentional, long-form.</p>
+    <a class="card-link" href="https://themagpiebrain.substack.com" target="_blank">Read the essays →</a>
+  </div>
+  <div class="work-card">
+    <h2 class="card-title">History &amp; <em>Place</em></h2>
+    <p class="card-body">Gallery guide at the British Museum (Roman Britain). In development: a walking tour of Cremona tracing Fascism and Resistance from the 1920s to WWII — an attempt to make the past legible in stone and street names.</p>
+  </div>
+</div>
+
+<!-- Sketch band: to add your sketch, replace the placeholder div with <img src="sketch.jpg" alt="Urban sketch"> -->
+<div class="sketch-band">
+  <div class="sketch-placeholder">
+    <div class="sketch-placeholder-frame">
+      <span class="sketch-placeholder-label">Urban sketch — your image here</span>
+    </div>
+    <span class="sketch-placeholder-sub">A city seen on foot, in ink</span>
+  </div>
+</div>
+
+<div class="section-header" id="about">
+  <span class="section-title">About</span>
+</div>
+
+<section class="about-band">
+  <div class="about-portrait-col">
+    <div class="portrait-frame">
+      <!-- To add your portrait: replace the div below with <img src="portrait.jpg" alt="Francesca Galli"> -->
+      <span class="portrait-label">Portrait</span>
+    </div>
+    <div class="portrait-label" style="text-align:center;margin-top:0.5rem">Francesca Galli</div>
+    <div class="place-mini">
+      <!-- To add a place photo: replace the div content with <img src="place.jpg" alt="Cremona"> -->
+      <span class="place-mini-label">Cremona · London</span>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-label">On the work</div>
+    <div class="about-text">
+      <p>I came to all of this through a single obsession: <strong>how knowledge moves, breaks, and gets reclaimed</strong> — in institutions, in algorithms, in archives, and in the fabric of cities. The consulting, the fellowship, the writing, the history projects: these are not separate careers. They are the same enquiry, conducted in different registers.</p>
+      <p>Originally from <strong>Cremona</strong>, I have lived in <strong>London</strong> for six years. I volunteer as a gallery guide at the British Museum, with a focus on Roman Britain. I am currently developing a historical walking tour of Cremona tracing Fascism and Resistance from the 1920s to the Second World War.</p>
+      <p>I also sketch cities, play board games with strategic seriousness, and write a Substack called <strong>The Magpie Brain</strong> — on history, ideas, and the texture of how we know things.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-header">
+  <span class="section-title">Latest writing</span>
+</div>
+
+<div class="writing-band">
+  <span class="writing-source-label">The Magpie Brain</span>
+  <div class="writing-inner" id="writing-inner">
+    <div class="writing-cover-placeholder"><span>cover</span></div>
+    <div class="writing-text">
+      <span class="writing-essay-title" style="color:var(--ink-faint);font-style:normal;font-weight:300">Fetching latest essay…</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-header" id="communities">
+  <span class="section-title">Communities</span>
+</div>
+
+<div class="communities-band">
+  <span class="communities-label">I participate in</span>
+  <a class="community-item" href="https://www.pathlesspath.com" target="_blank">The Pathless Path</a>
+  <span class="community-sep">✦</span>
+  <a class="community-item" href="#" target="_blank">Thought Experiments in Pubs</a>
+  <span class="community-sep">✦</span>
+  <a class="community-item" href="https://www.urbansketchers.org" target="_blank">Urban Sketchers</a>
+  <span class="community-sep">✦</span>
+  <a class="community-item" href="https://www.nwspk.com" target="_blank">Newspeak House</a>
+</div>
+
+<footer id="contact">
+  <div class="footer-left">
+    <p class="footer-name">Francesca Galli</p>
+    <p class="footer-tagline">London · Cremona</p>
+    <div class="footer-links">
+      <a href="https://themagpiebrain.substack.com" target="_blank">Substack ↗</a>
+      <a href="#" target="_blank">LinkedIn ↗</a>
+      <a href="https://www.nwspk.com" target="_blank">Newspeak House ↗</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <span class="contact-label">Get in touch</span>
+    <div class="contact-form">
+      <input type="text" id="cf-name" placeholder="Your name" autocomplete="off">
+      <input type="email" id="cf-email" placeholder="Your email" autocomplete="off">
+      <textarea id="cf-message" placeholder="Your message" rows="3"></textarea>
+      <button class="contact-submit" onclick="submitForm()">Send →</button>
+      <span class="contact-success" id="contact-success">Message sent — thank you.</span>
+      <span class="contact-error" id="contact-error">Something went wrong — please try again.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="footer-bottom">© Francesca Galli</div>
+
+<script>
+// ── Substack RSS feed ──
+const RSS_URL = 'https://themagpiebrain.substack.com/feed';
+const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&count=1`;
+fetch(API)
+  .then(r => r.json())
+  .then(data => {
+    if (data.status !== 'ok' || !data.items?.length) return showFallback();
+    const post = data.items[0];
+    const date = new Date(post.pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const img = post.thumbnail || post.enclosure?.link || data.feed?.image || '';
+    const subtitle = post.description
+      ? post.description.replace(/<[^>]+>/g, '').trim().slice(0, 120).replace(/\s+\S*$/, '') + '…'
+      : '';
+    document.getElementById('writing-inner').innerHTML = `
+      ${img
+        ? `<a href="${post.link}" target="_blank"><img class="writing-cover" src="${img}" alt=""></a>`
+        : `<div class="writing-cover-placeholder"><span>cover</span></div>`}
+      <div class="writing-text">
+        <a class="writing-essay-title" href="${post.link}" target="_blank">${post.title}</a>
+        ${subtitle ? `<span class="writing-subtitle">${subtitle}</span>` : ''}
+        <div class="writing-meta">
+          <span class="writing-date">${date}</span>
+          <a class="writing-read" href="${post.link}" target="_blank">Read →</a>
+        </div>
+      </div>`;
+  })
+  .catch(showFallback);
+
+function showFallback() {
+  document.getElementById('writing-inner').innerHTML = `
+    <div class="writing-cover-placeholder"><span>cover</span></div>
+    <div class="writing-text">
+      <a class="writing-essay-title" href="https://themagpiebrain.substack.com" target="_blank">The Magpie Brain</a>
+      <div class="writing-meta">
+        <a class="writing-read" href="https://themagpiebrain.substack.com" target="_blank">Read →</a>
+      </div>
+    </div>`;
+}
+
+// ── Contact form ──
+function submitForm() {
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !message) return;
+
+  const btn = document.querySelector('.contact-submit');
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '0.5';
+
+  fetch('https://formspree.io/f/xjgazayo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ name, email, message })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.ok) {
+      document.getElementById('cf-name').value = '';
+      document.getElementById('cf-email').value = '';
+      document.getElementById('cf-message').value = '';
+      document.getElementById('contact-success').style.display = 'block';
+      document.getElementById('contact-error').style.display = 'none';
+      btn.style.display = 'none';
+    } else {
+      document.getElementById('contact-error').style.display = 'block';
+      btn.textContent = 'Send →';
+      btn.style.opacity = '1';
+    }
+  })
+  .catch(() => {
+    document.getElementById('contact-error').style.display = 'block';
+    btn.textContent = 'Send →';
+    btn.style.opacity = '1';
+  });
+}
+</script>
+
+</body>
+</html>
