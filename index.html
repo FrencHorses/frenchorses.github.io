@@ -403,7 +403,7 @@ fetch('https://corsproxy.io/?url=https://themagpiebrain.substack.com/feed')
     // Cover image — proxy through corsproxy.io to avoid CORS block on S3
     const media = item.querySelector('content') || item.querySelector('enclosure');
     const rawImg = media?.getAttribute('url') || '';
-    const img = rawImg ? `https://corsproxy.io/?url=${encodeURIComponent(rawImg)}` : '';
+    const img = rawImg;
 
     // Subtitle from description — strip HTML tags
     const descRaw = item.querySelector('description')?.textContent || '';
