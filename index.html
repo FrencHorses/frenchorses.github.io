@@ -24,11 +24,12 @@ header {
   border-bottom: 1px solid var(--rule);
   padding: 0 clamp(1.5rem, 5vw, 4rem);
   display: flex; align-items: center; justify-content: flex-end; height: 56px;
-  position: sticky; top: 0; background: var(--parchment); z-index: 10;
+  position: sticky; top: 0; background: #ddd5c4; z-index: 10;
+  border-left: 3px solid var(--accent);
 }
 .masthead-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); }
 nav { display: flex; gap: 2rem; }
-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: color 0.2s; }
 nav a:hover { color: var(--accent); }
 
 .hero {
@@ -150,7 +151,7 @@ nav a:hover { color: var(--accent); }
 .writing-band {
   border-bottom: 1px solid var(--rule);
   display: flex; align-items: stretch; min-height: 160px;
-  padding-left: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 5vw, 4rem);
   background: var(--parchment);
 }
 .writing-inner { display: flex; align-items: center; flex: 1; overflow: hidden; }
