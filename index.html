@@ -143,12 +143,13 @@ nav a:hover { color: var(--accent); }
 
 .writing-band {
   border-bottom: 1px solid var(--rule);
-  display: flex; align-items: stretch; min-height: 120px;
+  display: flex; align-items: stretch; min-height: 160px;
+  padding-left: clamp(1.5rem, 5vw, 4rem);
 }
 .writing-inner { display: flex; align-items: center; flex: 1; overflow: hidden; }
-.writing-cover { width: 120px; height: 120px; flex-shrink: 0; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
+.writing-cover { width: 160px; height: 160px; flex-shrink: 0; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
 .writing-cover-placeholder {
-  width: 120px; height: 120px; flex-shrink: 0; background: var(--parchment-dark);
+  width: 160px; height: 160px; flex-shrink: 0; background: var(--parchment-dark);
   border-right: 1px solid var(--rule); display: flex; align-items: center; justify-content: center;
 }
 .writing-cover-placeholder span { font-family: var(--mono); font-size: 8px; color: var(--ink-faint); letter-spacing: 0.1em; text-transform: uppercase; writing-mode: vertical-rl; opacity: 0.5; }
