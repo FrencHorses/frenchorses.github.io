@@ -385,7 +385,7 @@ footer {
 
 <script>
 // ── Substack RSS feed (direct fetch + XML parse) ──
-fetch('https://themagpiebrain.substack.com/feed')
+fetch('https://corsproxy.io/?url=https://themagpiebrain.substack.com/feed')
   .then(r => r.text())
   .then(str => {
     const xml = new DOMParser().parseFromString(str, 'text/xml');
