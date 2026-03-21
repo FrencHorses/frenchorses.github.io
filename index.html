@@ -115,8 +115,6 @@ nav a:hover { color: var(--accent); }
   display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2rem);
   background: var(--parchment-dark);
 }
-.about-top { display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2rem); }
-.about-portrait-col { display: flex; justify-content: center; }
 .portrait-frame {
   width: 100%; aspect-ratio: 3/4; border: 1px dashed rgba(184,146,42,0.4);
   position: relative; display: flex; align-items: center; justify-content: center;
@@ -305,24 +303,13 @@ footer {
 </div>
 
 <section class="about-band">
-  <div class="about-top">
-    <div class="about-portrait-col">
-      <div class="portrait-frame" style="width:180px;aspect-ratio:3/4">
-        <!-- To add your portrait: replace the span below with <img src="portrait.jpg" alt="Francesca Galli"> -->
-        <span class="portrait-label">Portrait</span>
-      </div>
-    </div>
-    <div class="about-right">
-      <div class="about-text">
-        <p>I came to all of this through a single obsession: <strong>how knowledge moves, breaks, and gets reclaimed</strong> — in institutions, in algorithms, in archives, and in the fabric of cities. The consulting, the fellowship, the writing, the history projects: these are not separate careers. They are the same enquiry, conducted in different registers.</p>
-        <p>Originally from <strong>Cremona</strong>, I have lived in <strong>London</strong> for six years. I volunteer as a gallery guide at the British Museum, with a focus on Roman Britain. I am currently developing a historical walking tour of Cremona tracing Fascism and Resistance from the 1920s to the Second World War.</p>
-        <p>I also sketch cities, play board games with strategic seriousness, and write a Substack called <strong>The Magpie Brain</strong> — on history, ideas, and the texture of how we know things.</p>
-      </div>
-    </div>
+  <div class="about-text">
+    <p>xxx</p>
+    <p>xx <strong>xxx</strong></p>
+    <p>xxx</p>
   </div>
-  <div class="place-mini">
-    <!-- To add a place photo: replace the span below with <img src="place.jpg" alt="Cremona"> -->
-    <span class="place-mini-label">Cremona · London</span>
+  <div style="display:flex; justify-content:center; margin-top: clamp(1.5rem, 3vw, 2.5rem);">
+    <img src="portrait.jpg" alt="Francesca Galli" style="width:320px; height:320px; object-fit:cover; object-position: center top; display:block;">
   </div>
 </section>
 
