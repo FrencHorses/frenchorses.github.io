@@ -152,7 +152,7 @@ nav a:hover { color: var(--accent); }
   padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 5vw, 4rem);
   background: var(--parchment);
 }
-.writing-inner { display: flex; align-items: center; flex: 1; overflow: hidden; }
+.writing-inner { display: flex; align-items: center; flex: 1; }
 .writing-cover { width: 160px; height: 160px; flex-shrink: 0; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
 .writing-cover-placeholder {
   width: 160px; height: 160px; flex-shrink: 0; background: var(--parchment-dark);
@@ -162,7 +162,7 @@ nav a:hover { color: var(--accent); }
 .writing-text { padding: 1rem clamp(1rem, 2.5vw, 2rem); display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; flex: 1; min-width: 0; }
 .writing-essay-title { font-size: clamp(0.95rem, 1.8vw, 1.15rem); font-weight: 500; font-style: italic; color: var(--ink); text-decoration: none; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
 .writing-essay-title:hover { color: var(--accent); }
-.writing-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--ink-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+.writing-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--ink-faint); white-space: normal; line-height: 1.4; }
 .writing-meta { display: flex; align-items: center; gap: 1rem; margin-top: 0.2rem; }
 .writing-date { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); letter-spacing: 0.1em; }
 .writing-read { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--accent-light); padding-bottom: 1px; transition: color 0.2s; }
@@ -369,41 +369,31 @@ footer {
 <div class="footer-bottom">© Francesca Galli</div>
 
 <script>
-// ── Substack RSS feed (direct fetch + XML parse) ──
-fetch('https://corsproxy.io/?url=https://themagpiebrain.substack.com/feed')
-  .then(r => r.text())
-  .then(str => {
-    const xml = new DOMParser().parseFromString(str, 'text/xml');
-    const items = Array.from(xml.querySelectorAll('item'));
+// ── Substack RSS feed (via rss2json, which handles CORS) ──
+fetch('https://api.rss2json.com/v1/api.json?rss_url=https://themagpiebrain.substack.com/feed')
+  .then(r => r.json())
+  .then(data => {
+    const items = data.items || [];
     if (!items.length) return showFallback();
 
     // Skip crossposts — they link to a different domain
     const ownDomain = 'themagpiebrain.substack.com';
-    const item = items.find(i => {
-      const link = i.querySelector('link')?.nextSibling?.nodeValue
-                || i.querySelector('link')?.textContent || '';
-      return link.includes(ownDomain);
-    }) || items[0];
+    const item = items.find(i => (i.link || '').includes(ownDomain)) || items[0];
 
-    const title = item.querySelector('title')?.textContent || '';
-    const link  = item.querySelector('link')?.nextSibling?.nodeValue
-                  || item.querySelector('link')?.textContent || '';
-    const pubDate = item.querySelector('pubDate')?.textContent || '';
+    const title = item.title || '';
+    const link = item.link || '';
+    const pubDate = item.pubDate || '';
     const date = pubDate
-      ? new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+      ? new Date(pubDate.replace(' ', 'T') + 'Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
       : '';
 
-    // Cover image — proxy through corsproxy.io to avoid CORS block on S3
-    const media = item.querySelector('content') || item.querySelector('enclosure');
-    const rawImg = media?.getAttribute('url') || '';
-    const img = rawImg;
+    // Cover image — thumbnail, falling back to the enclosure, falling back to first <img> in content
+    const contentImgMatch = (item.content || '').match(/<img[^>]+src="([^"]+)"/);
+    const img = item.thumbnail || item.enclosure?.link || (contentImgMatch ? contentImgMatch[1] : '');
 
     // Subtitle from description — strip HTML tags
-    const descRaw = item.querySelector('description')?.textContent || '';
-    const descText = descRaw.replace(/<[^>]+>/g, '').trim();
-    const subtitle = descText.length > 10
-      ? descText.slice(0, 120).replace(/\s+\S*$/, '') + '…'
-      : '';
+    const descRaw = item.description || '';
+    const subtitle = descRaw.replace(/<[^>]+>/g, '').trim();
 
     document.getElementById('writing-inner').innerHTML = `
       ${img
